@@ -1,6 +1,10 @@
+import os
 from PIL import Image
 
-img = Image.open("test_pics/testpic_1.jpeg")
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+
+img = Image.open(os.path.join(base_dir, "test_pics", "testpic_1.jpeg"))
 img = img.convert("RGB")
 img = img.resize((10, 10))
 
