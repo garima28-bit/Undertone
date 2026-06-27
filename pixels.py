@@ -16,3 +16,6 @@ for i in range(0, 10):
         green.append(g)
         blue.append(b)
 
+print(red, len(red))
+print(green, len(green))
+print(blue, len(blue))
