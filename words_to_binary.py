@@ -8,5 +8,5 @@ for i in word:
         continue
     else:
         converted_val = char_to_bin(i)
-        l_s_t = converted_val[7]
-        print(converted_val, l_s_t)
+        l_s_b = converted_val[7]
+        print(converted_val, l_s_b)
