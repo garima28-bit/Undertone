@@ -6,10 +6,11 @@ word = input("Please enter the word or phrase you wish to hide! - ")            
 base_dir = os.path.dirname(os.path.abspath(__file__))                                   # Takes the file location
 img = Image.open(os.path.join(base_dir, "test_pics", "testpic_1.jpeg"))                 # Goes to the image and opens it
 img = img.convert("RGB")                                                                # Converts it to RGB just in case if it is not
-img = img.resize((10, 10))
+pixels = img.load()
 
 channels = []                                         # Creates an empty array for the RGB channels of the pixels
 modified = []                                         # Cretes and empty array for the modified bits
+modified_channels = []
 word_to_bit = ""                                      # Creates an empty string for the Binary of the words
 
 def char_to_bin(a):                                   # Defining a Fucntion that returns the Binary of a Char
@@ -25,7 +26,7 @@ def check_and_flip(binary_input,bit_input):           # Defininf a Fucntion that
 
 for i in range(0, img.width):                         # Gets the RGB Channels of each pixel and appends it to the Channels Array
     for j in range(0, img.height):
-        r, g, b = img.getpixel((i, j))
+        r, g, b = pixels[i, j]
         channels.append(r)
         channels.append(g)
         channels.append(b)
@@ -40,8 +41,18 @@ for i in word:                                       # Creates the Binary for th
 for val,bit_input in zip(channels,word_to_bit):
     modified.append(check_and_flip(f"{val:08b}",bit_input))
 
+for i in modified:
+    modified_channels.append(int(i,2))
 
-print(channels, len(channels))
-print(modified, len(modified))
-print(word_to_bit, len(word_to_bit))
 
+index = 0
+for i in range(img.width):
+    for j in range(img.height):
+        r = modified_channels[index] if index < len(modified_channels) else channels[index]
+        g = modified_channels[index + 1] if index + 1 < len(modified_channels) else channels[index + 1]
+        b = modified_channels[index + 2] if index + 2 < len(modified_channels) else channels[index + 2]
+        pixels[i, j] = (r, g, b)
+        index += 3
+
+img.save(os.path.join(base_dir, "test_pics", "output.png"))  # save as PNG not JPEG
+print("Image Saved!!")
