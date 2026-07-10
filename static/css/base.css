@@ -1,0 +1,224 @@
+/* ============================================================
+   UNDERTONE — base.css
+   Shared design tokens, reset, and structural chrome (nav/footer)
+   used by both the landing page and the encode page.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ---- Color: deep, warm, non-cliché ---- */
+  --void:      #170F20;   /* base background — deep aubergine-black */
+  --depth:     #221531;   /* secondary panels, raised sections */
+  --surface:   #2C1C40;   /* cards, inputs, hover surfaces */
+  --surface-2: #382650;   /* borders, dividers on dark */
+
+  --copper:    #C98A4B;   /* primary accent — hidden gold leaf */
+  --ember:     #E2A857;   /* brighter accent, hover/active */
+  --moss:      #7C8A6E;   /* rare second accent — used sparingly */
+
+  --ink:       #F1E7DA;   /* primary text, warm ivory not pure white */
+  --ink-dim:   #C9BCD6;   /* secondary text */
+  --fade:      #83719A;   /* muted labels, placeholders */
+
+  /* ---- Type ---- */
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Work Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* ---- Layout ---- */
+  --max-width: 1180px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 22px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><circle cx='12' cy='12' r='8' fill='rgba(226,168,87,0.14)' stroke='%23E2A857' stroke-width='2.1'/><circle cx='12' cy='12' r='8' fill='none' stroke='%23170F20' stroke-width='0.6' opacity='0.35'/><line x1='17.6' y1='17.6' x2='26.5' y2='26.5' stroke='%23C98A4B' stroke-width='2.6' stroke-linecap='round'/><line x1='17.6' y1='17.6' x2='26.5' y2='26.5' stroke='%23170F20' stroke-width='0.6' opacity='0.35'/></svg>") 12 12, auto;
+}
+
+/* Buttons keep a normal pointer cursor — the spyglass is for
+   everything that isn't a button */
+button,
+.btn-primary,
+.btn-ghost,
+.btn-submit,
+.nav-cta,
+input[type="submit"],
+input[type="button"] {
+  cursor: pointer;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.08;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img { max-width: 100%; display: block; }
+
+button, input, textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+/* Visible keyboard focus everywhere — never suppressed */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+label:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+/* ---- Nav ---- */
+.site-nav {
+  position: relative;
+  z-index: 20;
+}
+
+.site-nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.brand .brand-mark {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--fade);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-size: 0.9rem;
+  color: var(--ink-dim);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover { color: var(--ink); }
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--surface-2);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.nav-cta:hover {
+  border-color: var(--copper);
+  background: rgba(201, 138, 75, 0.08);
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  border-top: 1px solid var(--surface-2);
+  margin-top: 6rem;
+  position: relative;
+  z-index: 5;
+}
+
+.site-footer .wrap {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-note {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fade);
+  letter-spacing: 0.04em;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+}
+
+.footer-links a:hover { color: var(--copper); }
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undertone — say it without saying it</title>
+  <meta name="description" content="Hide a message inside an image. Nothing about the picture changes. Everything about what it carries does.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+</head>
+<body>
+
+  <div class="field" aria-hidden="true"></div>
+
+  <nav class="site-nav">
+    <div class="wrap">
+      <a href="{{ url_for('index') }}" class="brand">
+        Undertone
+      </a>
+      <div class="nav-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="{{ url_for('encode') }}" class="nav-cta">Hide a message →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-inner">
+          <span class="eyebrow">Steganography, made invisible</span>
+          <h1>Say it in the open, <em>without</em> saying it.</h1>
+          <p class="hero-sub">
+            Undertone hides a message inside an ordinary photo. The picture
+            looks exactly the same to anyone who sees it — only the person
+            with the key can pull the words back out.
+          </p>
+          <div class="hero-actions">
+            <a href="{{ url_for('encode') }}" class="btn-primary">
+              Hide a message <span class="arrow">→</span>
+            </a>
+            <a href="#how-it-works" class="btn-ghost">See how it works</a>
+          </div>
+          <div class="hero-hint">
+            <span class="dot"></span>
+            move your cursor — this page is hiding something too
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process" id="how-it-works">
+      <div class="wrap">
+        <span class="eyebrow">The process</span>
+        <div class="process-grid">
+          <div class="process-step">
+            <span class="step-num">01</span>
+            <h3>Upload a photo</h3>
+            <p>Any image works. It's the vessel — its pixels have more room in them than you'd think.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-num">02</span>
+            <h3>Write what it carries</h3>
+            <p>Type your message. It's woven into the image data itself, not attached or hidden in a filename.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-num">03</span>
+            <h3>Share the image</h3>
+            <p>Send it anywhere images travel. It opens like any photo — the message only surfaces with the key.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="assurance">
+      <div class="wrap">
+        <div class="assurance-inner">
+          <div class="assurance-item">
+            <span class="eyebrow">Unchanged to the eye</span>
+            <p>The output image is visually identical to the original — no watermark, no artifact, no tell.</p>
+          </div>
+          <div class="assurance-item">
+            <span class="eyebrow">Local by default</span>
+            <p>Encoding happens on this server, not a third party. Your photo isn't stored longer than it takes to process.</p>
+          </div>
+          <div class="assurance-item">
+            <span class="eyebrow">Lossless by design</span>
+            <p>Output is saved as PNG, so every hidden bit survives — no compression artifacts to shake it loose.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span class="footer-note">UNDERTONE — Hidden in the Ordinary</span>
+      <div class="footer-links">
+        <a href="{{ url_for('encode') }}">Hide a message</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/cursor.js') }}"></script>
+</body>
+</html>

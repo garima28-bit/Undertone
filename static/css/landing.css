@@ -1,0 +1,258 @@
+/* ============================================================
+   UNDERTONE — landing.css
+   Page-specific styles for the landing page, including the
+   cursor-reactive "reveal" background (the signature element).
+   Depends on base.css being loaded first.
+   ============================================================ */
+
+/* ---- Reactive background layer ----
+   Two stacked layers:
+   1. .field       — a slow, ambient gradient wash (always visible, faint)
+   2. .field::after — a spotlight mask that only reveals a denser
+                       texture of hidden binary/noise where the
+                       cursor is, controlled by --mx / --my set in JS.
+   This literalizes the brief: the background reacts to the cursor,
+   and the interaction itself performs "revealing something hidden".
+*/
+
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  --mx: 50%;
+  --my: 40%;
+  background:
+    radial-gradient(60% 50% at 18% 12%, rgba(124, 138, 110, 0.10), transparent 60%),
+    radial-gradient(70% 60% at 85% 85%, rgba(201, 138, 75, 0.12), transparent 65%),
+    var(--void);
+}
+
+.field::before {
+  /* faint static grain, always present at low opacity */
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+.field::after {
+  /* the spotlight: a mono grid of 0/1 characters, revealed only
+     near the cursor via a radial-gradient mask */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 22px, rgba(226, 168, 87, 0.5) 22px 23px, transparent 23px 44px),
+    repeating-linear-gradient(0deg, transparent 0 22px, rgba(226, 168, 87, 0.28) 22px 23px, transparent 23px 44px);
+  -webkit-mask-image: radial-gradient(circle 260px at var(--mx) var(--my), black 0%, transparent 72%);
+          mask-image: radial-gradient(circle 260px at var(--mx) var(--my), black 0%, transparent 72%);
+  transition: -webkit-mask-image 0.05s linear;
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field::after { display: none; }
+}
+
+/* On touch devices there's no cursor to react to — keep it calm */
+@media (hover: none) {
+  .field::after { display: none; }
+}
+
+/* ---- Hero ---- */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(3.5rem, 10vh, 7rem);
+  padding-bottom: clamp(4rem, 12vh, 8rem);
+}
+
+.hero-inner {
+  max-width: 760px;
+}
+
+.hero .eyebrow {
+  display: inline-block;
+  margin-bottom: 1.4rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  color: var(--ink);
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--ember);
+  font-weight: 400;
+}
+
+.hero-sub {
+  margin-top: 1.6rem;
+  max-width: 46ch;
+  font-size: 1.1rem;
+  color: var(--ink-dim);
+  font-weight: 300;
+}
+
+.hero-actions {
+  margin-top: 2.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.8rem;
+  background: var(--copper);
+  color: var(--void);
+  font-weight: 500;
+  font-size: 0.98rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--ember);
+  transform: translateY(-1px);
+}
+
+.btn-primary .arrow {
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover .arrow {
+  transform: translateX(3px);
+}
+
+.btn-ghost {
+  font-size: 0.92rem;
+  color: var(--ink-dim);
+  border-bottom: 1px solid var(--surface-2);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  color: var(--ink);
+  border-color: var(--copper);
+}
+
+.hero-hint {
+  margin-top: 3.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fade);
+  letter-spacing: 0.04em;
+}
+
+.hero-hint .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--moss);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ---- Process: this is a genuine 3-step sequence (upload, hide, share)
+   so numbered markers are earned here, unlike a decorative use ---- */
+
+.process {
+  position: relative;
+  z-index: 1;
+  padding: clamp(2rem, 6vh, 3rem) 0 clamp(3rem, 8vh, 5rem);
+}
+
+.process-grid {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--surface-2);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.process-step {
+  background: var(--depth);
+  padding: 2.2rem 2rem;
+}
+
+.process-step .step-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--copper);
+  letter-spacing: 0.08em;
+}
+
+.process-step h3 {
+  margin-top: 0.9rem;
+  font-size: 1.25rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.process-step p {
+  margin-top: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--ink-dim);
+  font-weight: 300;
+}
+
+@media (max-width: 780px) {
+  .process-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Assurance strip ---- */
+
+.assurance {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1rem, 4vh, 2rem) 0 clamp(3rem, 8vh, 5rem);
+}
+
+.assurance-inner {
+  display: flex;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  border-top: 1px solid var(--surface-2);
+}
+
+.assurance-item {
+  max-width: 240px;
+}
+
+.assurance-item .eyebrow {
+  font-size: 0.65rem;
+}
+
+.assurance-item p {
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--ink-dim);
+  font-weight: 300;
+}

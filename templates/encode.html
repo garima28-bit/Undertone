@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hide a message — Undertone</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/encode.css') }}">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="wrap">
+      <a href="{{ url_for('index') }}" class="brand">
+        Undertone
+      </a>
+      <div class="nav-links">
+        <a href="{{ url_for('index') }}">← Back home</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="encode-hero">
+      <div class="wrap">
+        <span class="eyebrow">Step one of one</span>
+        <h1>Hide something in plain sight.</h1>
+        <p>Choose a photo, write what it should carry, and Undertone weaves the message into the image itself. The file you download looks completely ordinary.</p>
+      </div>
+    </section>
+
+    <section class="encode-form">
+      <div class="wrap">
+        <form action="{{ url_for('encode') }}" method="POST" enctype="multipart/form-data" id="encode-form">
+          <div class="form-grid">
+
+            <!-- Left: image upload -->
+            <div>
+              <div class="field-label">
+                <label for="image-input">Cover image</label>
+                <span class="field-optional">Required</span>
+              </div>
+              <div class="dropzone" id="dropzone">
+                <input
+                  type="file"
+                  id="image-input"
+                  name="image"
+                  accept="image/png, image/jpeg, image/bmp"
+                  required
+                  aria-describedby="dropzone-sub"
+                >
+                <div class="dropzone-placeholder">
+                  <div class="dropzone-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 16V4M12 4L7 9M12 4L17 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M4 16V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div class="dropzone-title">Drop a photo here</div>
+                  <div class="dropzone-sub" id="dropzone-sub">or click to browse — PNG or BMP holds a message best</div>
+                </div>
+                <img class="dropzone-preview" id="dropzone-preview" alt="Preview of the selected image">
+                <div class="dropzone-filename" id="dropzone-filename"></div>
+              </div>
+              <p class="field-hint">Undertone doesn't keep your photo any longer than it takes to process it.</p>
+            </div>
+
+            <!-- Right: message + options -->
+            <div>
+              <div class="field-group">
+                <div class="field-label">
+                  <label for="message-input">Message to hide</label>
+                  <span class="field-optional">Required</span>
+                </div>
+                <textarea
+                  id="message-input"
+                  name="message"
+                  maxlength="2000"
+                  placeholder="Say what you actually mean..."
+                  required
+                ></textarea>
+                <div class="char-count"><span id="char-count">0</span> / 2000</div>
+              </div>
+
+              <div class="submit-row">
+                <button type="submit" class="btn-submit" id="submit-btn">
+                  Encode &amp; download
+                </button>
+                <span class="submit-note">Nothing sent anywhere else</span>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span class="footer-note">UNDERTONE — Hidden in the Ordinary</span>
+      <div class="footer-links">
+        <a href="{{ url_for('index') }}">Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+</body>
+</html>

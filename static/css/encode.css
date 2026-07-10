@@ -1,0 +1,253 @@
+/* ============================================================
+   UNDERTONE — encode.css
+   Page-specific styles for the encode page: dropzone, preview,
+   and message form. Depends on base.css being loaded first.
+   ============================================================ */
+
+body {
+  background:
+    radial-gradient(55% 45% at 90% 0%, rgba(201, 138, 75, 0.08), transparent 60%),
+    radial-gradient(50% 40% at 5% 100%, rgba(124, 138, 110, 0.07), transparent 60%),
+    var(--void);
+}
+
+.encode-hero {
+  padding-top: clamp(2.5rem, 7vh, 4rem);
+  padding-bottom: 1rem;
+}
+
+.encode-hero .eyebrow { margin-bottom: 1.1rem; display: inline-block; }
+
+.encode-hero h1 {
+  font-size: clamp(2.1rem, 4.4vw, 3rem);
+  max-width: 20ch;
+}
+
+.encode-hero p {
+  margin-top: 1.1rem;
+  max-width: 52ch;
+  color: var(--ink-dim);
+  font-weight: 300;
+  font-size: 1.02rem;
+}
+
+/* ---- Form layout ---- */
+
+.encode-form {
+  padding: 2.5rem 0 6rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Dropzone ---- */
+
+.dropzone {
+  position: relative;
+  border: 1.5px dashed var(--surface-2);
+  border-radius: var(--radius-lg);
+  background: var(--depth);
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  overflow: hidden;
+}
+
+.dropzone:hover,
+.dropzone.is-dragover {
+  border-color: var(--copper);
+  background: var(--surface);
+}
+
+.dropzone.has-image {
+  padding: 0;
+  border-style: solid;
+}
+
+.dropzone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dropzone-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  color: var(--copper);
+}
+
+.dropzone-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+
+.dropzone-sub {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--fade);
+  font-family: var(--font-mono);
+}
+
+.dropzone-preview {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+  display: none;
+}
+
+.dropzone.has-image .dropzone-preview { display: block; }
+.dropzone.has-image .dropzone-placeholder { display: none; }
+
+.dropzone-filename {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.9rem 1.1rem;
+  background: linear-gradient(0deg, rgba(23, 15, 32, 0.92), transparent);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--ink);
+  text-align: left;
+  display: none;
+}
+
+.dropzone.has-image .dropzone-filename { display: block; }
+
+/* ---- Message fields ---- */
+
+.field-group {
+  margin-bottom: 1.6rem;
+}
+
+.field-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.field-label label {
+  font-size: 0.86rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.field-label .field-optional {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--fade);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+textarea,
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  background: var(--depth);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1rem;
+  font-size: 0.95rem;
+  color: var(--ink);
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+textarea::placeholder,
+input::placeholder {
+  color: var(--fade);
+}
+
+textarea:focus,
+input:focus {
+  border-color: var(--copper);
+  outline: none;
+}
+
+textarea {
+  min-height: 130px;
+  line-height: 1.5;
+}
+
+.char-count {
+  margin-top: 0.4rem;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--fade);
+}
+
+.field-hint {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--fade);
+  font-weight: 300;
+}
+
+.submit-row {
+  margin-top: 2.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.9rem;
+  background: var(--copper);
+  color: var(--void);
+  font-weight: 500;
+  font-size: 0.98rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+  background: var(--ember);
+  transform: translateY(-1px);
+}
+
+.btn-submit:disabled {
+  background: var(--surface-2);
+  color: var(--fade);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-note {
+  font-size: 0.8rem;
+  color: var(--fade);
+  font-family: var(--font-mono);
+}
