@@ -76,7 +76,7 @@ Each pixel in an image is made of color channels (R, G, B), each stored as an 8-
 
 ## Contributors
 
-Built by [Veshesh](https://github.com/<itsveshesh>) and [Garima](https://github.com/<garima28-bit>).
+Built by [Garima](https://github.com/garima28-bit) and [Veshesh](https://github.com/itsveshesh).
 
 ## License
 
