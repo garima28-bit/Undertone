@@ -43,7 +43,7 @@ python3 -m venv venv
 source venv/bin/activate      # on Windows: venv\Scripts\activate
 
 # install dependencies
-pip3 install -r requirements.txt    # on Windows: pip install -r requirements.txt
+pip3 install -r requirements.txt    
 
 # run the app
 flask run
