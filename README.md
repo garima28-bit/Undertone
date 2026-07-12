@@ -35,7 +35,7 @@ Undertone lets you embed a secret text message into the pixel data of a PNG imag
 
 ```bash
 # clone the repo
-git clone https://github.com/<your-username>/undertone.git
+git clone https://github.com/garima28-bit/undertone.git
 cd undertone
 
 # create and activate a virtual environment
