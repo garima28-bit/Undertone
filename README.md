@@ -1,6 +1,6 @@
 # Undertone
 
-A web-based steganography tool that hides text messages inside PNG images using LSB (Least Significant Bit) encoding — invisible to the eye, recoverable with the right key.
+A web-based steganography tool that hides text messages inside PNG images using LSB (Least Significant Bit) encoding — invisible to the eye, recoverable with Undertone.
 
 Built with Flask and Pillow.
 
@@ -23,7 +23,7 @@ Undertone lets you embed a secret text message into the pixel data of a PNG imag
 | Image processing | Pillow (PIL) |
 | Frontend | HTML / CSS / JS — dark theme, cipher-teal & signal-amber palette |
 | Typography | Space Grotesk (headings), IBM Plex Mono (body/code) |
-| Deployment | Gunicorn (WSGI server) |
+| Deployment | --- |
 
 ## Getting started
 
@@ -64,7 +64,7 @@ undertone/
 
 ## Roadmap
 
-- [ ] `/decode` route — extract hidden messages from uploaded images
+- [x] `/decode` route — extract hidden messages from uploaded images
 - [x] LSB encoding logic
 - [x] Null-byte delimiter for clean message boundaries
 - [x] Multi-page frontend
