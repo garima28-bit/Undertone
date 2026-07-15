@@ -64,7 +64,7 @@ undertone/
 
 ## Roadmap
 
-- [ ] `/decode` route — extract hidden messages from uploaded images
+- [x] `/decode` route — extract hidden messages from uploaded images
 - [x] LSB encoding logic
 - [x] Null-byte delimiter for clean message boundaries
 - [x] Multi-page frontend
