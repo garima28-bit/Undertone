@@ -1,0 +1,58 @@
+/* ============================================================
+   UNDERTONE — decode.css
+   Small addendum on top of encode.css for the decode page: a
+   single-column form (no message field to sit alongside the
+   dropzone) and the result/error panel that reveals the
+   decoded message. Depends on base.css and encode.css.
+   ============================================================ */
+
+.form-grid--single {
+  grid-template-columns: 1fr;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.form-grid--single .submit-row {
+  margin-top: 1.6rem;
+}
+
+/* ---- Result panel ---- */
+
+.result-panel {
+  max-width: 520px;
+  margin: 2.2rem auto 0;
+  padding: 1.6rem 1.8rem;
+  background: var(--depth);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius-lg);
+}
+
+.result-panel .eyebrow {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+}
+
+.result-text {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.result-panel--error {
+  border-color: rgba(226, 116, 87, 0.35);
+  background: rgba(226, 116, 87, 0.06);
+}
+
+.result-panel--error .eyebrow {
+  color: #E27457;
+}
+
+.result-panel--error .result-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+  font-weight: 300;
+}

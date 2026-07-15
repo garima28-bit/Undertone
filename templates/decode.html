@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hide a message — Undertone</title>
+  <title>Reveal a message — Undertone</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/encode.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/decode.css') }}">
 </head>
 <body>
 
@@ -15,7 +16,7 @@
         Undertone
       </a>
       <div class="nav-links">
-        <a href="{{ url_for('decode') }}">Reveal a message</a>
+        <a href="{{ url_for('encode') }}">Hide a message</a>
         <a href="{{ url_for('index') }}">← Back home</a>
       </div>
     </div>
@@ -24,21 +25,20 @@
   <main>
     <section class="encode-hero">
       <div class="wrap">
-        <span class="eyebrow">Step one of two</span>
-        <h1>Hide something in plain sight.</h1>
-        <p>Choose a photo, write what it should carry, and Undertone weaves the message into the image itself. The file you download looks completely ordinary.</p>
+        <span class="eyebrow">Step two of two</span>
+        <h1>Reveal what's hidden.</h1>
+        <p>Choose an image encoded with Undertone and it'll pull the message back out. Nothing to type, no passphrase — just the photo.</p>
       </div>
     </section>
 
     <section class="encode-form">
       <div class="wrap">
-        <form action="{{ url_for('encode') }}" method="POST" enctype="multipart/form-data" id="encode-form">
-          <div class="form-grid">
+        <form action="{{ url_for('decode') }}" method="POST" enctype="multipart/form-data" id="decode-form">
+          <div class="form-grid form-grid--single">
 
-            <!-- Left: image upload -->
             <div>
               <div class="field-label">
-                <label for="image-input">Cover image</label>
+                <label for="image-input">Encoded image</label>
                 <span class="field-optional">Required</span>
               </div>
               <div class="dropzone" id="dropzone">
@@ -57,35 +57,17 @@
                       <path d="M4 16V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
-                  <div class="dropzone-title">Drop a photo here</div>
-                  <div class="dropzone-sub" id="dropzone-sub">or click to browse — PNG or BMP holds a message best</div>
+                  <div class="dropzone-title">Drop the image here</div>
+                  <div class="dropzone-sub" id="dropzone-sub">or click to browse — use the exact file Undertone gave you</div>
                 </div>
                 <img class="dropzone-preview" id="dropzone-preview" alt="Preview of the selected image">
                 <div class="dropzone-filename" id="dropzone-filename"></div>
               </div>
               <p class="field-hint">Undertone doesn't keep your photo any longer than it takes to process it.</p>
-            </div>
-
-            <!-- Right: message + options -->
-            <div>
-              <div class="field-group">
-                <div class="field-label">
-                  <label for="message-input">Message to hide</label>
-                  <span class="field-optional">Required</span>
-                </div>
-                <textarea
-                  id="message-input"
-                  name="message"
-                  maxlength="2000"
-                  placeholder="Say what you actually mean..."
-                  required
-                ></textarea>
-                <div class="char-count"><span id="char-count">0</span> / 2000</div>
-              </div>
 
               <div class="submit-row">
                 <button type="submit" class="btn-submit" id="submit-btn">
-                  Encode &amp; download
+                  Reveal message
                 </button>
                 <span class="submit-note">Nothing sent anywhere else</span>
               </div>
@@ -93,6 +75,27 @@
 
           </div>
         </form>
+
+        {% if image_data %}
+        <div class="result-panel" role="status">
+          <span class="eyebrow">The image you uploaded</span>
+          <img class="result-image" src="{{ image_data }}" alt="Uploaded image with hidden message">
+        </div>
+        {% endif %}
+
+        {% if decoded_message is defined %}
+        <div class="result-panel" role="status">
+          <span class="eyebrow">What it was carrying</span>
+          <p class="result-text">{{ decoded_message }}</p>
+        </div>
+        {% endif %}
+
+        {% if error is defined %}
+        <div class="result-panel result-panel--error" role="alert">
+          <span class="eyebrow">No message found</span>
+          <p class="result-text">{{ error }}</p>
+        </div>
+        {% endif %}
       </div>
     </section>
   </main>
@@ -101,7 +104,7 @@
     <div class="wrap">
       <span class="footer-note">UNDERTONE — Hidden in the Ordinary</span>
       <div class="footer-links">
-        <a href="{{ url_for('decode') }}">Reveal a message</a>
+        <a href="{{ url_for('encode') }}">Hide a message</a>
         <a href="{{ url_for('index') }}">Home</a>
       </div>
     </div>
