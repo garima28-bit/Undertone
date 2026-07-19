@@ -68,7 +68,7 @@ undertone/
 - [x] LSB encoding logic
 - [x] Null-byte delimiter for clean message boundaries
 - [x] Multi-page frontend
-- [ ] Deployment (Render / DigitalOcean)
+- [x] Deployment (Render / DigitalOcean)
 
 ## How LSB steganography works
 
