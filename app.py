@@ -1,15 +1,5 @@
 """
-Undertone — minimal Flask app.
-
-Wires up the two pages built for this project:
-  GET  /            -> landing page
-  GET  /encode       -> the encode page (upload form)
-  POST /encode       -> receives the form and returns the encoded image
-
-The actual steganography (LSB pixel encoding, or whatever method you
-choose) is intentionally left as a stub in `encode_message_in_image` —
-drop your implementation in there. Everything else (routing, file
-handling, the response) is ready to go.
+Undertone — A minimal Steganography Flask app.
 """
 
 import io
@@ -17,29 +7,14 @@ from flask import Flask, render_template, request, send_file, abort
 from PIL import Image
 
 app = Flask(__name__)
-app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16MB upload cap
+app.config["MAX_CONTENT_LENGTH"] = 24 * 1024 * 1024  # 24MB upload cap
 
-# Marks the end of a hidden message in the pixel bitstream. Encoding
-# appends it after the message; decoding stops as soon as it sees it.
-# Two bytes rather than one: an accidental collision now needs two
-# specific consecutive bytes to line up (~1/65536 by chance) instead
-# of just one (~1/256).
 DELIMITER = "\x00\xFF"
 
 
 @app.route("/")
 def index():
     return render_template("index.html")
-
-
-@app.route("/privacy")
-def privacy():
-    return render_template("privacy.html")
-
-
-@app.route("/terms")
-def terms():
-    return render_template("terms.html")
 
 
 @app.route("/encode", methods=["GET", "POST"])
@@ -60,7 +35,7 @@ def encode():
     except Exception:
         abort(400, "That file couldn't be read as an image.")
 
-    encoded_image = encode_message_in_image(source_image, message)
+    encoded_image = encoding(source_image, message)
 
     buffer = io.BytesIO()
     encoded_image.save(buffer, format="PNG")  # PNG: lossless, keeps hidden bits intact
@@ -90,7 +65,7 @@ def decode():
         abort(400, "That file couldn't be read as an image.")
 
     try:
-        decoded_message = decode_message_from_image(source_image)
+        decoded_message = decoding(source_image)
     except ValueError as e:
         return render_template("decode.html", error=str(e))
 
@@ -105,7 +80,7 @@ def check_and_flip(binary_input, bit_input):  # Defining a Function that takes i
         return result
 
 
-def encode_message_in_image(image: Image.Image, word: str) -> Image.Image:
+def encoding(image: Image.Image, word: str) -> Image.Image:
     encoded = image.copy()          # work on a copy — don't mutate the caller's image
     pixels = encoded.load()
 
@@ -155,7 +130,7 @@ def encode_message_in_image(image: Image.Image, word: str) -> Image.Image:
     return encoded
 
 
-def decode_message_from_image(image: Image.Image) -> str:
+def decoding(image: Image.Image) -> str:
     encoded = image.convert("RGB")
     pixels = encoded.load()
 
