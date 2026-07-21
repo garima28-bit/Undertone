@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Undertone</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/legal.css') }}">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="wrap">
+      <a href="{{ url_for('index') }}" class="brand">
+        Undertone
+      </a>
+      <div class="nav-links">
+        <a href="{{ url_for('encode') }}">Hide a message</a>
+        <a href="{{ url_for('decode') }}">Reveal a message</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="legal">
+      <div class="wrap">
+        <a class="legal-back" href="{{ url_for('index') }}">&larr; Back to Undertone</a>
+
+        <span class="eyebrow">Legal</span>
+        <h1>Privacy Policy</h1>
+        <div class="legal-updated">Last updated: July 2026</div>
+
+        <p>
+          Undertone is a steganography tool that lets you hide text messages inside PNG images
+          using LSB (Least Significant Bit) encoding. This page explains what happens to your
+          data when you use it.
+        </p>
+
+        <h2>What we process</h2>
+        <p>
+          When you use Undertone to encode or decode a message, the image you upload and the
+          text you enter are processed only to perform that operation. We do not require an
+          account, and we do not ask for personal information such as your name or email address
+          to use the core tool.
+        </p>
+
+        <h2>What we don't store</h2>
+        <ul>
+          <li>We do not permanently store the images you upload.</li>
+          <li>We do not permanently store the messages you encode or decode.</li>
+          <li>Files are processed for the duration of your request and are not retained afterward.</li>
+        </ul>
+
+        <h2>Server logs</h2>
+        <p>
+          Like most web services, our hosting provider may automatically log basic technical
+          information (such as IP address, timestamps, and request paths) for security and
+          debugging purposes. These logs are not used to identify individuals and are not shared
+          with third parties.
+        </p>
+
+        <h2>Cookies</h2>
+        <p>
+          Undertone does not use tracking or advertising cookies. Any cookies present are limited
+          to what's strictly necessary for the site to function.
+        </p>
+
+        <h2>Third-party hosting</h2>
+        <p>
+          This application is hosted on Render. Render may process technical request data as part
+          of standard infrastructure operation, governed by Render's own privacy policy.
+        </p>
+
+        <h2>Changes to this policy</h2>
+        <p>
+          This policy may be updated as the project evolves. Continued use of Undertone after
+          changes are posted constitutes acceptance of the revised policy.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about this policy can be raised via the
+          <a href="https://github.com/garima28-bit/Undertone">GitHub repository</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span class="footer-note">UNDERTONE — hidden in the ordinary</span>
+      <div class="footer-links">
+        <a href="{{ url_for('encode') }}">Hide a message</a>
+        <a href="{{ url_for('decode') }}">Reveal a message</a>
+        <a href="{{ url_for('terms') }}">Terms</a>
+        <a href="{{ url_for('index') }}">Home</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

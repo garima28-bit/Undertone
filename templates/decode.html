@@ -25,7 +25,7 @@
   <main>
     <section class="encode-hero">
       <div class="wrap">
-        <span class="eyebrow">Step two of two</span>
+        <span class="eyebrow">Step one of one</span>
         <h1>Reveal what's hidden.</h1>
         <p>Choose an image encoded with Undertone and it'll pull the message back out. Nothing to type, no passphrase — just the photo.</p>
       </div>
@@ -76,13 +76,6 @@
           </div>
         </form>
 
-        {% if image_data %}
-        <div class="result-panel" role="status">
-          <span class="eyebrow">The image you uploaded</span>
-          <img class="result-image" src="{{ image_data }}" alt="Uploaded image with hidden message">
-        </div>
-        {% endif %}
-
         {% if decoded_message is defined %}
         <div class="result-panel" role="status">
           <span class="eyebrow">What it was carrying</span>
@@ -102,9 +95,11 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <span class="footer-note">UNDERTONE — Hidden in the Ordinary</span>
+      <span class="footer-note">UNDERTONE — hidden in the ordinary</span>
       <div class="footer-links">
         <a href="{{ url_for('encode') }}">Hide a message</a>
+        <a href="{{ url_for('privacy') }}">Privacy</a>
+        <a href="{{ url_for('terms') }}">Terms</a>
         <a href="{{ url_for('index') }}">Home</a>
       </div>
     </div>

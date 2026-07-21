@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms &amp; Conditions — Undertone</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/legal.css') }}">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="wrap">
+      <a href="{{ url_for('index') }}" class="brand">
+        Undertone
+      </a>
+      <div class="nav-links">
+        <a href="{{ url_for('encode') }}">Hide a message</a>
+        <a href="{{ url_for('decode') }}">Reveal a message</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="legal">
+      <div class="wrap">
+        <a class="legal-back" href="{{ url_for('index') }}">&larr; Back to Undertone</a>
+
+        <span class="eyebrow">Legal</span>
+        <h1>Terms &amp; Conditions</h1>
+        <div class="legal-updated">Last updated: July 2026</div>
+
+        <p>
+          By using Undertone, you agree to the following terms. If you don't agree, please
+          don't use the site.
+        </p>
+
+        <h2>What Undertone is</h2>
+        <p>
+          Undertone is a student-built, open-source tool for encoding and decoding hidden text
+          within PNG images using LSB steganography. It's provided as a personal/educational
+          project, not a commercial product.
+        </p>
+
+        <h2>Acceptable use</h2>
+        <ul>
+          <li>Don't use Undertone to conceal or transmit illegal content.</li>
+          <li>Don't use it to harass, deceive, or harm others.</li>
+          <li>Don't attempt to overload, abuse, or disrupt the service (e.g. automated bulk requests).</li>
+        </ul>
+
+        <h2>No warranty</h2>
+        <p>
+          Undertone is provided "as is," without warranty of any kind. We make no guarantees
+          about uptime, data integrity, or fitness for any particular purpose. Encoding/decoding
+          accuracy is not guaranteed for every image type or size.
+        </p>
+
+        <h2>Limitation of liability</h2>
+        <p>
+          The creators of Undertone are not liable for any loss, damage, or consequence arising
+          from use of this tool, including loss of uploaded images or encoded messages.
+        </p>
+
+        <h2>Intellectual property</h2>
+        <p>
+          Undertone's source code is available on
+          <a href="https://github.com/garima28-bit/Undertone">GitHub</a>.
+          Refer to the repository for license terms governing reuse of the code.
+        </p>
+
+        <h2>Changes to these terms</h2>
+        <p>
+          These terms may be updated as the project develops. Continued use after changes are
+          posted constitutes acceptance of the revised terms.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span class="footer-note">UNDERTONE — hidden in the ordinary</span>
+      <div class="footer-links">
+        <a href="{{ url_for('encode') }}">Hide a message</a>
+        <a href="{{ url_for('decode') }}">Reveal a message</a>
+        <a href="{{ url_for('privacy') }}">Privacy</a>
+        <a href="{{ url_for('index') }}">Home</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

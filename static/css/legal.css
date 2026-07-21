@@ -1,0 +1,96 @@
+/* ============================================================
+   UNDERTONE — legal.css
+   Shared styles for the Privacy Policy and Terms & Conditions
+   pages. Reuses the nav/footer chrome from base.css; this file
+   only styles the document body itself. Depends on base.css.
+   ============================================================ */
+
+.legal {
+  padding: clamp(1.5rem, 5vh, 3rem) 0 clamp(4rem, 10vh, 6rem);
+}
+
+.legal .wrap {
+  max-width: 720px;
+}
+
+.legal-back {
+  display: inline-block;
+  margin-bottom: 2.2rem;
+  font-size: 0.9rem;
+  color: var(--ink-dim);
+  transition: color 0.2s ease;
+}
+
+.legal-back:hover {
+  color: var(--copper);
+}
+
+.legal .eyebrow {
+  display: block;
+  margin-bottom: 0.85rem;
+}
+
+.legal h1 {
+  font-size: clamp(1.9rem, 4.2vw, 2.5rem);
+  color: var(--ink);
+}
+
+.legal-updated {
+  margin-top: 0.7rem;
+  margin-bottom: 2.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--fade);
+  letter-spacing: 0.03em;
+}
+
+.legal h2 {
+  margin-top: 2.6rem;
+  margin-bottom: 0.9rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--ink);
+  border-left: 2px solid var(--copper);
+  padding-left: 0.85rem;
+}
+
+.legal p {
+  margin-top: 0.9rem;
+  max-width: 62ch;
+  font-size: 0.98rem;
+  font-weight: 300;
+  color: var(--ink-dim);
+}
+
+.legal ul {
+  margin-top: 0.9rem;
+  padding-left: 1.3rem;
+}
+
+.legal li {
+  margin-bottom: 0.55rem;
+  font-size: 0.98rem;
+  font-weight: 300;
+  color: var(--ink-dim);
+}
+
+.legal li::marker {
+  color: var(--copper);
+}
+
+.legal a {
+  color: var(--copper);
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.legal a:hover {
+  color: var(--ember);
+  border-color: var(--ember);
+}
+
+/* First paragraph right under the title shouldn't carry the
+   usual heading gap above it */
+.legal-updated + p {
+  margin-top: 0;
+}
